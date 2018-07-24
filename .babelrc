@@ -25,5 +25,17 @@
       }
     ],
     "inline-react-svg"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "inline-dotenv",
+          {
+            "path": ".env.dev"
+          }
+        ]
+      ]
+    }
+  }
 }

@@ -13,6 +13,7 @@ export const GetRandomPhotoQuery = gql`
       likes
       description
       id
+      liked_by_user
       urls {
         full
         small
@@ -32,7 +33,16 @@ export const GetRandomPhotoQuery = gql`
 export const likePhotoMutation = gql`
   mutation likePhoto($id: ID!) {
     likePhoto(id: $id) {
+      color
       likes
+      description
+      id
+      liked_by_user
+      urls {
+        full
+        small
+        raw
+      }
     }
   }
 `;
