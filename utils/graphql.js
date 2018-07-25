@@ -14,6 +14,9 @@ export const GetRandomPhotoQuery = gql`
       description
       id
       liked_by_user
+      location {
+        name
+      }
       urls {
         full
         small
@@ -21,7 +24,7 @@ export const GetRandomPhotoQuery = gql`
       }
       user {
         name
-        location
+        username
         profile_image {
           small
         }
