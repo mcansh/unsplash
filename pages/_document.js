@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { description } from '../package.json';
-import { twitter } from '../utils/author';
+import { twitter } from '../utils/helpers';
 
 class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
