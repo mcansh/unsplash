@@ -10,7 +10,6 @@ const Footer = styled.footer`
   left: 0;
   width: 100%;
   font-family: 'SF Mono', Courier, monospace;
-  color: white;
 `;
 
 export default Footer;
