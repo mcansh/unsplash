@@ -21,55 +21,7 @@ injectGlobal`
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-weight: 400;
     background: white;
-  }
-
-  #nprogress {
-    pointer-events: none;
-  }
-
-  #nprogress .bar {
-    background: black;
-    position: fixed;
-    z-index: 1031;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0.2rem;
-  }
-
-  #nprogress {
-    pointer-events: none;
-  }
-
-  #nprogress .bar {
-    background: black;
-    position: fixed;
-    z-index: 1031;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0.2rem;
-  }
-
-  #nprogress .peg {
-    display: block;
-    position: absolute;
-    right: 0;
-    width: 10rem;
-    height: 100%;
-    box-shadow: 0 0 1rem black, 0 0 0.5rem black;
-    opacity: 1;
-    transform: rotate(3deg) translate(0, -0.4rem);
-  }
-
-  .nprogress-custom-parent {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .nprogress-custom-parent #nprogress .spinner,
-  .nprogress-custom-parent #nprogress .bar {
-    position: absolute;
+    line-height: 1.15;
   }
 `;
 
