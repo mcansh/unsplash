@@ -1,5 +1,11 @@
 import { gql } from 'apollo-boost';
 
+export const menuStatusQuery = gql`
+  query isMenuOpen @client {
+    isMenuOpen
+  }
+`;
+
 export const testQuery = gql`
   query isLogin {
     isLogin

@@ -16,12 +16,16 @@ import FullscreenImage from '../components/fullscreenImage';
 import Footer from '../components/footer';
 import User from '../components/user';
 import Button from '../components/button';
+import { rel } from '../utils/helpers';
+
+import Menu from '../components/menu';
 
 import {
   GetRandomPhotoQuery,
   likePhotoMutation,
   downloadPhotoMutation,
   testQuery,
+  menuStatusQuery,
 } from '../utils/graphql';
 
 const ErrorMessage = styled.h1`
@@ -33,16 +37,24 @@ const ErrorMessage = styled.h1`
   align-items: center;
 `;
 
+/* eslint-disable react/prop-types */
 const Unsplash = adopt({
+  isMenuOpen: ({ render }) => <Query query={menuStatusQuery}>{render}</Query>,
   randomPhoto: ({ render }) => (
     <Query query={GetRandomPhotoQuery}>{render}</Query>
   ),
   testQuery: ({ render }) => <Query query={testQuery}>{render}</Query>,
 });
+/* eslint-enable react/prop-types */
 
 const Index = () => (
   <Unsplash>
-    {({ randomPhoto: { data, loading, error } }) => {
+    {({
+      randomPhoto: { data, loading, error },
+      isMenuOpen: {
+        data: { isMenuOpen },
+      },
+    }) => {
       if (loading) return <p>loading...</p>;
       if (error) return <ErrorMessage>error...</ErrorMessage>;
       const randomPhoto = data.randomPhoto[0];
@@ -55,7 +67,7 @@ const Index = () => (
           </Head>
           <Header>
             <Link href="https://unsplash.com">
-              <a id="logo" rel="noopener external nofollow" target="_blank">
+              <a id="logo" rel={rel} target="_blank">
                 <Logo height={32} width={32} />
               </a>
             </Link>
@@ -114,6 +126,7 @@ const Index = () => (
             <Button>
               <More fill="#777" />
             </Button>
+            <Menu open={isMenuOpen} />
           </Header>
           <FullscreenImage
             src={randomPhoto.urls.full}
