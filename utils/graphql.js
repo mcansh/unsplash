@@ -1,19 +1,17 @@
-import { gql } from 'apollo-boost';
-
-export const menuStatusQuery = gql`
+export const menuStatusQuery = `
   query isMenuOpen @client {
     isMenuOpen
   }
 `;
 
-export const testQuery = gql`
+export const testQuery = `
   query isLogin {
     isLogin
   }
 `;
 
-export const GetRandomPhotoQuery = gql`
-  query photo {
+export const GetRandomPhotoQuery = `
+  query GetRandomPhotoQuery {
     randomPhoto(collections: 155105) {
       color
       likes
@@ -42,7 +40,7 @@ export const GetRandomPhotoQuery = gql`
   }
 `;
 
-export const likePhotoMutation = gql`
+export const likePhotoMutation = `
   mutation likePhoto($id: ID!) {
     likePhoto(id: $id) {
       color
@@ -59,7 +57,7 @@ export const likePhotoMutation = gql`
   }
 `;
 
-export const downloadPhotoMutation = gql`
+export const downloadPhotoMutation = `
   mutation downloadPhoto($id: ID!) {
     downloadPhoto(id: $id)
   }

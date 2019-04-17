@@ -1,8 +1,8 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { ApolloProvider } from 'react-apollo';
-import withApolloClient from '../lib/withData';
+import { ClientContext } from 'graphql-hooks';
+import withGraphQLClient from '../lib/with-graphql-client';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -10,9 +10,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  *,
-  *::before,
-  *::after {
+  * {
     box-sizing: inherit;
     margin: 0;
   }
@@ -26,32 +24,22 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
   render() {
-    const { Component, pageProps, apolloClient } = this.props;
+    const { Component, pageProps, graphQLClient } = this.props;
 
     return (
       <Container>
         <ThemeProvider theme={{ primary: 'black' }}>
-          <>
-            <GlobalStyle />
-            <ApolloProvider client={apolloClient}>
+          <ClientContext.Provider value={graphQLClient}>
+            <>
+              <GlobalStyle />
               <Component {...pageProps} />
-            </ApolloProvider>
-          </>
+            </>
+          </ClientContext.Provider>
         </ThemeProvider>
       </Container>
     );
   }
 }
 
-export default withApolloClient(MyApp);
+export default withGraphQLClient(MyApp);

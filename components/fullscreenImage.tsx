@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const FullScreenImageWrapper = styled.div`
+const FullScreenImageWrapper = styled.div<{ background: string }>`
   height: 100vh;
   width: 100vw;
   display: block;
@@ -15,9 +15,17 @@ const FullScreenImageWrapper = styled.div`
   }
 `;
 
-const FullScreenImage = ({ background, ...props }) => (
+interface Props
+  extends React.DetailedHTMLProps<
+    React.ImgHTMLAttributes<HTMLImageElement>,
+    HTMLImageElement
+  > {
+  background: string;
+}
+
+const FullScreenImage = ({ background, alt, ...props }: Props) => (
   <FullScreenImageWrapper background={background}>
-    <img {...props} />
+    <img alt={alt} {...props} />
   </FullScreenImageWrapper>
 );
 

@@ -1,5 +1,6 @@
 {
   "name": "unsplash-new-tab",
-  "dotenv": ".env",
-  "alias": "unsplash.loganmcansh.com"
+  "alias": [
+    "unsplash.loganmcansh.com"
+  ]
 }
