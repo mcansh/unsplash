@@ -68,7 +68,12 @@ const Index = () => (
           <Header>
             <Link href="https://unsplash.com">
               <a id="logo" rel={rel} target="_blank">
-                <Logo height={32} width={32} />
+                <Logo
+                  css={`
+                    height: 3.2rem;
+                    width: 3.2rem;
+                  `}
+                />
               </a>
             </Link>
             <Mutation
@@ -106,17 +111,16 @@ const Index = () => (
             >
               {downloadPhoto => (
                 <Button
+                  as="a"
+                  css={`
+                    margin-right: 1rem;
+                  `}
+                  target="_blank"
+                  href={randomPhoto.urls.raw}
+                  download={randomPhoto.id}
                   onClick={() => {
                     // log the download on unsplash
                     downloadPhoto();
-
-                    // create a link and open the image
-                    const button = document.createElement('a');
-                    button.target = '_blank';
-                    button.href = randomPhoto.urls.raw;
-                    button.download = randomPhoto.id;
-                    button.click();
-                    button.remove();
                   }}
                 >
                   <Download fill="#777" />
@@ -129,13 +133,13 @@ const Index = () => (
             <Menu open={isMenuOpen} />
           </Header>
           <FullscreenImage
+            background={randomPhoto.color}
             src={randomPhoto.urls.full}
-            data-unsplash-url={`https://unsplash.com/photos/${randomPhoto.id}`}
+            data-unsplash-url={randomPhoto.links.html}
             alt={
               randomPhoto.description ||
               `A wonderful photo by ${randomPhoto.user.name}`
             }
-            background={randomPhoto.color}
           />
           <Footer>
             <User

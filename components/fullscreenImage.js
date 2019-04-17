@@ -1,11 +1,28 @@
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const FullscreenImage = styled.img`
+const FullScreenImageWrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  object-fit: cover;
   display: block;
-  background: ${({ background }) => background};
+  background: ${props => props.background};
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
 `;
 
-export default FullscreenImage;
+const FullScreenImage = ({ background, ...props }) => (
+  <FullScreenImageWrapper background={background}>
+    <img {...props} />
+  </FullScreenImageWrapper>
+);
+
+FullScreenImage.propTypes = {
+  background: PropTypes.string.isRequired,
+};
+
+export default FullScreenImage;

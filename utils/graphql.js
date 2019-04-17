@@ -23,6 +23,9 @@ export const GetRandomPhotoQuery = gql`
       location {
         name
       }
+      links {
+        html
+      }
       urls {
         full
         small
