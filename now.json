@@ -1,6 +1,31 @@
 {
-  "name": "unsplash-new-tab",
+  "name": "unsplash",
+  "version": 2,
   "alias": [
     "unsplash.loganmcansh.com"
+  ],
+  "env": {
+    "KEY": "@unsplash-key",
+    "SECRET": "@unsplash-secret"
+  },
+  "builds": [
+    {
+      "src": "packages/www/package.json",
+      "use": "@now/next"
+    },
+    {
+      "src": "packages/api/index.ts",
+      "use": "@now/node@canary"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/graphql",
+      "dest": "packages/api/index.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "packages/www/$1"
+    }
   ]
 }

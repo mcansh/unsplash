@@ -29,9 +29,10 @@ interface Props {
   likedByUser: boolean;
   url: string;
   likes: number;
+  refetch: () => void;
 }
 
-const Header = ({ id, likedByUser, url, likes }: Props) => (
+const Header = ({ id, likedByUser, url, likes, refetch }: Props) => (
   <HeaderStyles>
     <Link href="https://unsplash.com">
       <a id="logo" rel={rel} target="_blank">
@@ -39,6 +40,7 @@ const Header = ({ id, likedByUser, url, likes }: Props) => (
           style={{
             height: '3.2rem',
             width: '3.2rem',
+            fill: 'white',
           }}
         />
       </a>
@@ -50,6 +52,9 @@ const Header = ({ id, likedByUser, url, likes }: Props) => (
     <DownloadPhoto id={id} url={url} />
     <Button>
       <More fill="#777" />
+    </Button>
+    <Button type="button" onClick={refetch}>
+      New Photo
     </Button>
   </HeaderStyles>
 );

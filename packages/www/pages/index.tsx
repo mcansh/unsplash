@@ -10,9 +10,32 @@ import User from '../components/user';
 import { GetRandomPhotoQuery } from '../utils/graphql';
 
 const Index = () => {
-  const { loading, error, data } = useQuery(GetRandomPhotoQuery);
-  if (loading) return <p>loading...</p>;
-  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  const { loading, error, data, refetch, cacheHit: _, ...errors } = useQuery(
+    GetRandomPhotoQuery
+  );
+
+  if (loading) {
+    return (
+      <div
+        css={`
+          display: flex;
+          min-height: 100vh;
+          justify-content: center;
+          align-items: center;
+
+          h1 {
+            font-family: 'SF Pro Text';
+            font-weight: 800;
+            text-transform: uppercase;
+          }
+        `}
+      >
+        <h1>Fetching new photo...</h1>
+      </div>
+    );
+  }
+
+  if (error) return <pre>{JSON.stringify(errors, null, 2)}</pre>;
   const randomPhoto = data.randomPhoto[0];
 
   return (
@@ -26,6 +49,7 @@ const Index = () => {
         url={randomPhoto.urls.raw}
         likedByUser={randomPhoto.liked_by_user}
         likes={randomPhoto.likes}
+        refetch={refetch}
       />
       <FullscreenImage
         background={randomPhoto.color}
