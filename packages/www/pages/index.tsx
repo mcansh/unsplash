@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import { useQuery } from 'graphql-hooks';
+import { useQuery } from 'urql';
 
+import { useRouter } from 'next/router';
 import Header from '../components/header';
 import FullscreenImage from '../components/fullscreenImage';
 import Footer from '../components/footer';
@@ -10,11 +11,13 @@ import User from '../components/user';
 import { GetRandomPhotoQuery } from '../utils/graphql';
 
 const Index = () => {
-  const { loading, error, data, refetch, cacheHit: _, ...errors } = useQuery(
-    GetRandomPhotoQuery
-  );
+  const [res] = useQuery({
+    query: GetRandomPhotoQuery,
+  });
 
-  if (loading) {
+  const router = useRouter();
+
+  if (res.fetching) {
     return (
       <div
         css={`
@@ -35,8 +38,8 @@ const Index = () => {
     );
   }
 
-  if (error) return <pre>{JSON.stringify(errors, null, 2)}</pre>;
-  const randomPhoto = data.randomPhoto[0];
+  if (res.error) return <pre>{JSON.stringify(res.error, null, 2)}</pre>;
+  const randomPhoto = res.data.randomPhoto[0];
 
   return (
     <div>
@@ -49,7 +52,7 @@ const Index = () => {
         url={randomPhoto.urls.raw}
         likedByUser={randomPhoto.liked_by_user}
         likes={randomPhoto.likes}
-        refetch={refetch}
+        refetch={() => router.reload()}
       />
       <FullscreenImage
         background={randomPhoto.color}

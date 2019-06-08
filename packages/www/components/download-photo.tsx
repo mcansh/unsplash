@@ -1,15 +1,20 @@
 import React from 'react';
-import { downloadPhotoMutation } from '~/utils/graphql';
+// @ts-ignore
 import VisuallyHidden from '@reach/visually-hidden';
-import { useMutation } from 'graphql-hooks';
-import Button from '~/components/button';
-import Download from '~/static/download.svg';
+import { useMutation } from 'urql';
+import { downloadPhotoMutation } from '../utils/graphql';
+import Download from '../static/download.svg';
+import Button from './button';
 
 const DownloadPhoto = ({ id, url }: { id: string; url: string }) => {
-  const [downloadPhoto] = useMutation(downloadPhotoMutation, {
-    variables: { id },
-  });
+  const [res, downloadPhoto] = useMutation(downloadPhotoMutation);
+
+  if (res.error) {
+    console.warn('oh no!');
+  }
+
   return (
+    // @ts-ignore
     <Button
       as="a"
       css={`
@@ -18,8 +23,7 @@ const DownloadPhoto = ({ id, url }: { id: string; url: string }) => {
       target="_blank"
       href={url}
       download={id}
-      // @ts-ignore
-      onClick={downloadPhoto}
+      onClick={() => downloadPhoto({ id })}
     >
       <VisuallyHidden>Download Photo</VisuallyHidden>
       <Download fill="#777" />

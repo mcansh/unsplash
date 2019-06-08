@@ -1,8 +1,8 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { ClientContext } from 'graphql-hooks';
-import withGraphQLClient from '../lib/with-graphql-client';
+import { Provider, Client } from 'urql';
+import withUrqlClient from '../lib/with-urql-client';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -23,23 +23,23 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-class MyApp extends App {
+class MyApp extends App<{ urqlClient: Client }> {
   render() {
-    const { Component, pageProps, graphQLClient } = this.props;
+    const { Component, pageProps, urqlClient } = this.props;
 
     return (
       <Container>
         <ThemeProvider theme={{ primary: 'black' }}>
-          <ClientContext.Provider value={graphQLClient}>
+          <Provider value={urqlClient}>
             <>
               <GlobalStyle />
               <Component {...pageProps} />
             </>
-          </ClientContext.Provider>
+          </Provider>
         </ThemeProvider>
       </Container>
     );
   }
 }
 
-export default withGraphQLClient(MyApp);
+export default withUrqlClient(MyApp);

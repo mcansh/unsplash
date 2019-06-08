@@ -1,11 +1,17 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { description } from '../package.json';
 import { twitter } from '../utils/helpers';
 
-class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+// @ts-ignore
+class MyDocument extends Document<{ styleTags: string }> {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 

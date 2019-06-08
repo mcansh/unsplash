@@ -1,8 +1,9 @@
 import React from 'react';
-import { useMutation } from 'graphql-hooks';
+import { useMutation } from 'urql';
+// @ts-ignore
 import VisuallyHidden from '@reach/visually-hidden';
 import { likePhotoMutation } from '../utils/graphql';
-import Like from '~/static/like.svg';
+import Like from '../static/like.svg';
 import Button from './button';
 
 const LikePhoto = ({
@@ -14,17 +15,19 @@ const LikePhoto = ({
   likes: number;
   likedByUser: boolean;
 }) => {
-  const [likePhoto] = useMutation(likePhotoMutation, {
-    variables: { id },
-  });
+  const [res, likePhoto] = useMutation(likePhotoMutation);
+
+  if (res.error) {
+    console.warn('oh noooooo!!');
+  }
 
   return (
     <>
       <Button
         // @ts-ignore
-        onClick={likePhoto}
+        onClick={() => likePhoto(id)}
         textColor={likedByUser ? 'white' : 'currentColor'}
-        background={likedByUser && '#f15151'}
+        background={likedByUser ? '#f15151' : undefined}
       >
         <VisuallyHidden>Like Photo</VisuallyHidden>
         <Like fill={likedByUser ? 'white' : '#f15151'} />

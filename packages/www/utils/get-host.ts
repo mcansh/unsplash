@@ -1,17 +1,32 @@
-function getProtocol(req) {
+import { IncomingMessage } from 'http';
+
+function getProtocol(req?: IncomingMessage) {
   if (req) {
-    return req.connection.encrypted ? 'https://' : 'http://';
+    if (req.headers['x-forwarded-proto']) {
+      return req.headers['x-forwarded-proto'];
+    }
+
+    if (req.connection) {
+      // @ts-ignore
+      return req.connection.encrypted ? 'https' : 'http';
+    }
+
+    return 'http';
   }
 
-  return `${window.location.protocol}//`;
+  return window.location.protocol;
 }
 
-function getHost(req) {
+function getHost(req?: IncomingMessage) {
   const protocol = getProtocol(req);
+  if (req) {
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    return `${protocol}://${host}`;
+  }
 
-  const host = req ? req.headers.host : window.location.host;
+  const { host } = window.location;
 
-  return `${protocol}${host}`;
+  return `${protocol}//${host}`;
 }
 
 export default getHost;

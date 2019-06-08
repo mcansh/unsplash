@@ -14,14 +14,14 @@
       "use": "@now/next"
     },
     {
-      "src": "packages/api/index.ts",
-      "use": "@now/node@canary"
+      "src": "packages/api/src/index.ts",
+      "use": "@now/node"
     }
   ],
   "routes": [
     {
       "src": "/graphql",
-      "dest": "packages/api/index.ts"
+      "dest": "packages/api/src/index.ts"
     },
     {
       "src": "/(.*)",
