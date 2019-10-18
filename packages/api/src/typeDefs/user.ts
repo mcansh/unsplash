@@ -37,6 +37,6 @@ export default gql`
   }
 
   extend type Query {
-    me: String!
+    me: User!
   }
 `;

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import getUrl, { headers } from './getUrl';
+import getUrl, { headers } from '../../utils/get-url';
 
 const getPhotoById = async ({
   id,

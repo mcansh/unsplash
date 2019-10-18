@@ -43,22 +43,16 @@ export const GetRandomPhotoQuery = `
 export const likePhotoMutation = `
   mutation likePhoto($id: ID!) {
     likePhoto(id: $id) {
-      color
       likes
-      description
-      id
       liked_by_user
-      urls {
-        full
-        small
-        raw
-      }
     }
   }
 `;
 
 export const downloadPhotoMutation = `
   mutation downloadPhoto($id: ID!) {
-    downloadPhoto(id: $id)
+    downloadPhoto(id: $id) {
+      url
+    }
   }
 `;

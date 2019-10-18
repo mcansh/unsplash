@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import getUrl, { headers } from './getUrl';
+import getUrl from '../../utils/get-url';
 
 const likePhoto = async ({
   id,
@@ -8,12 +8,13 @@ const likePhoto = async ({
   id: string;
   accessToken: string;
 }) => {
-  const pathname = `/photos/${id}/like`;
-  const url = getUrl({ pathname, accessToken });
+  const url = `https://api.unsplash.com/photos/${id}/like`;
 
   return fetch(url, {
     method: 'POST',
-    headers,
+    headers: {
+      authorization: accessToken,
+    },
   });
 };
 

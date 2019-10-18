@@ -1,9 +1,7 @@
 {
   "name": "unsplash",
   "version": 2,
-  "alias": [
-    "unsplash.loganmcansh.com"
-  ],
+  "alias": ["unsplash.loganmcansh.com"],
   "env": {
     "KEY": "@unsplash-key",
     "SECRET": "@unsplash-secret"

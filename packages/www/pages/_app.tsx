@@ -3,6 +3,7 @@ import App, { Container } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider, Client } from 'urql';
 import withUrqlClient from '../lib/with-urql-client';
+import { UserProvider } from '~/components/context/user-context';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -30,12 +31,14 @@ class MyApp extends App<{ urqlClient: Client }> {
     return (
       <Container>
         <ThemeProvider theme={{ primary: 'black' }}>
-          <Provider value={urqlClient}>
-            <>
-              <GlobalStyle />
-              <Component {...pageProps} />
-            </>
-          </Provider>
+          <UserProvider>
+            <Provider value={urqlClient}>
+              <>
+                <GlobalStyle />
+                <Component {...pageProps} />
+              </>
+            </Provider>
+          </UserProvider>
         </ThemeProvider>
       </Container>
     );

@@ -5,6 +5,6 @@ const { name, email, url } = parse(author);
 
 const twitter = 'loganmcansh';
 
-export { name, email, url, twitter };
+const rel = 'noopener external nofollow';
 
-export const rel = 'noopener external nofollow';
+export { name, email, url, twitter, rel };

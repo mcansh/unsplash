@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import getUrl, { headers, UrlOptions } from './getUrl';
+import getUrl, { headers, UrlOptions } from '../../utils/get-url';
 
 const getPhotos = (options: UrlOptions) => {
   const url = getUrl(options);

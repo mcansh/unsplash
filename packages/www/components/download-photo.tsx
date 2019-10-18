@@ -10,7 +10,7 @@ const DownloadPhoto = ({ id, url }: { id: string; url: string }) => {
   const [res, downloadPhoto] = useMutation(downloadPhotoMutation);
 
   if (res.error) {
-    console.warn('oh no!');
+    console.warn('oh no!', res.error);
   }
 
   return (

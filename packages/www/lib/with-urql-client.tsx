@@ -3,17 +3,15 @@ import { Client } from 'urql';
 // @ts-ignore
 import ssrPrepass from 'react-ssr-prepass';
 import { AppContext } from 'next/app';
+import nookies from 'nookies';
 import getHost from '../utils/get-host';
 import initUrqlClient from './init-urql-client';
 
 const withUrqlClient = (App: any) => {
   return class WithUrql extends React.Component {
     static async getInitialProps(appContext: AppContext) {
-      const {
-        Component,
-        router,
-        ctx: { req },
-      } = appContext;
+      const { Component, router, ctx } = appContext;
+      const token = nookies.get(ctx).access_token;
 
       // Run the wrapped component's getInitialProps function
       let appProps = {};
@@ -23,13 +21,13 @@ const withUrqlClient = (App: any) => {
 
       // getInitialProps is universal, but we only want
       // to run server-side rendered suspense on the server
-      if (!req) {
+      if (!ctx.req) {
         return appProps;
       }
 
-      const host = `${getHost(req)}/graphql`;
+      const host = `${getHost(ctx.req)}/graphql`;
 
-      const [urqlClient, ssrCache] = initUrqlClient(undefined, host);
+      const [urqlClient, ssrCache] = initUrqlClient(undefined, host, token);
 
       // Run suspense and hence all urql queries
       await ssrPrepass(
@@ -49,22 +47,30 @@ const withUrqlClient = (App: any) => {
         ...appProps,
         urqlState,
         host,
+        token,
       };
     }
 
     urqlClient: Client | null = null;
 
     constructor(
-      props: AppContext & { host: string; urqlState: any; urqlClient: Client }
+      props: AppContext & {
+        host: string;
+        urqlState: any;
+        urqlClient: Client;
+        token: string;
+      }
     ) {
       super(props);
       if (props.urqlClient) {
         this.urqlClient = props.urqlClient;
       } else {
-        console.log(props.host);
-
         // Create the urql client and rehydrate the prefetched data
-        const [urqlClient] = initUrqlClient(props.urqlState, props.host);
+        const [urqlClient] = initUrqlClient(
+          props.urqlState,
+          props.host,
+          props.token
+        );
         this.urqlClient = urqlClient;
       }
     }

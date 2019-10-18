@@ -58,6 +58,10 @@ export default gql`
     custom: String
   }
 
+  type PhotoDownload {
+    url: String!
+  }
+
   type Query {
     photos(count: Int, page: Int, orderBy: String, curated: Boolean): [Photo!]!
     randomPhoto(
@@ -76,6 +80,6 @@ export default gql`
 
   type Mutation {
     likePhoto(id: ID!): Photo!
-    downloadPhoto(id: ID!): Boolean!
+    downloadPhoto(id: ID!): PhotoDownload!
   }
 `;

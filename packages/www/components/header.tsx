@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '~/components/button';
 import Link from 'next/link';
 import Logo from '../static/logo.svg';
 import Plus from '../static/plus.svg';
 import More from '../static/more.svg';
 import { rel } from '../utils/helpers';
+import Button from './button';
 import DownloadPhoto from './download-photo';
 import LikePhoto from './like-photo';
 

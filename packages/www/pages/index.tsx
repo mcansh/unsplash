@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import { useQuery } from 'urql';
 
-import { useRouter } from 'next/router';
 import Header from '../components/header';
 import FullscreenImage from '../components/fullscreenImage';
 import Footer from '../components/footer';
@@ -11,11 +10,9 @@ import User from '../components/user';
 import { GetRandomPhotoQuery } from '../utils/graphql';
 
 const Index = () => {
-  const [res] = useQuery({
+  const [res, refetch] = useQuery({
     query: GetRandomPhotoQuery,
   });
-
-  const router = useRouter();
 
   if (res.fetching) {
     return (
@@ -27,7 +24,7 @@ const Index = () => {
           align-items: center;
 
           h1 {
-            font-family: 'SF Pro Text';
+            font-family: 'SFProText-Regular';
             font-weight: 800;
             text-transform: uppercase;
           }
@@ -52,7 +49,7 @@ const Index = () => {
         url={randomPhoto.urls.raw}
         likedByUser={randomPhoto.liked_by_user}
         likes={randomPhoto.likes}
-        refetch={() => router.reload()}
+        refetch={() => refetch({ requestPolicy: 'network-only' })}
       />
       <FullscreenImage
         background={randomPhoto.color}

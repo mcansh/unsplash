@@ -18,14 +18,14 @@ const LikePhoto = ({
   const [res, likePhoto] = useMutation(likePhotoMutation);
 
   if (res.error) {
-    console.warn('oh noooooo!!');
+    console.warn('oh noooooo!!', res.error);
   }
 
   return (
     <>
       <Button
         // @ts-ignore
-        onClick={() => likePhoto(id)}
+        onClick={() => likePhoto({ id })}
         textColor={likedByUser ? 'white' : 'currentColor'}
         background={likedByUser ? '#f15151' : undefined}
       >
