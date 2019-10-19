@@ -17,11 +17,11 @@ const CustomLink = styled.a`
   color: white;
 `;
 
-const Name = CustomLink.extend`
+const Name = styled(CustomLink)`
   font-size: 1.6rem;
 `;
 
-const Location = CustomLink.extend`
+const Location = styled(CustomLink)`
   margin-top: 0.5rem;
   font-size: 1.1rem;
 `;
