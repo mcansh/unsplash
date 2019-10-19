@@ -7,6 +7,7 @@ class PhotoAPI extends RESTDataSource {
 
   public willSendRequest(request: RequestOptions) {
     request.headers.set('Authorization', `Client-ID ${process.env.KEY}`);
+    request.headers.set('Accept-Version', 'v1');
   }
 
   public getRandomPhotos(args: UrlOptions) {
