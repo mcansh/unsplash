@@ -1,9 +1,6 @@
 import React from 'react';
 import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { ApolloProvider } from 'react-apollo';
-
-import withApolloClient from '../lib/withData';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -27,30 +24,18 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
   render() {
-    const { Component, pageProps, apolloClient } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
       <ThemeProvider theme={{ primary: 'black' }}>
         <>
           <GlobalStyle />
-          <ApolloProvider client={apolloClient}>
-            <Component {...pageProps} />
-          </ApolloProvider>
+          <Component {...pageProps} />
         </>
       </ThemeProvider>
     );
   }
 }
 
-export default withApolloClient(MyApp);
+export default MyApp;
