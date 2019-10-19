@@ -4,7 +4,14 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['prettier.comfig.js', 'stylelint.config.js'],
+        devDependencies: [
+          '__tests__/**/*',
+          'test-utils/index.tsx',
+          '@types/jest-dom.d.ts',
+          'next.config.js',
+          'prettier.config.js',
+          'stylelint.config.js',
+        ],
       },
     ],
   },

@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background: none;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background: ${({ background }) => background || 'rgba(255,255,255,0.8)'};
+  background: ${props => props.background || 'rgba(255,255,255,0.8)'};
   color: #777;
   border-radius: 0.6rem;
   font-size: 1.1rem;

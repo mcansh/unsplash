@@ -1,10 +1,11 @@
 import React from 'react';
-import App, { Container } from 'next/app';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import App from 'next/app';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ApolloProvider } from 'react-apollo';
+
 import withApolloClient from '../lib/withData';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   html {
     font-size: 10px;
     box-sizing: border-box;
@@ -40,13 +41,14 @@ class MyApp extends App {
     const { Component, pageProps, apolloClient } = this.props;
 
     return (
-      <Container>
-        <ThemeProvider theme={{ primary: 'black' }}>
+      <ThemeProvider theme={{ primary: 'black' }}>
+        <>
+          <GlobalStyle />
           <ApolloProvider client={apolloClient}>
             <Component {...pageProps} />
           </ApolloProvider>
-        </ThemeProvider>
-      </Container>
+        </>
+      </ThemeProvider>
     );
   }
 }

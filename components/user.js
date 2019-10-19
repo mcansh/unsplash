@@ -2,6 +2,7 @@ import React from 'react';
 import { string, shape } from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
+
 import { rel } from '../utils/helpers';
 
 const Wrap = styled.div`

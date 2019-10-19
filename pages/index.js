@@ -5,18 +5,16 @@ import styled from 'styled-components';
 import { Query, Mutation } from 'react-apollo';
 import { adopt } from 'react-adopt';
 
-import Logo from '../static/logo.svg';
-import Like from '../static/like.svg';
-import Plus from '../static/plus.svg';
-import Download from '../static/download.svg';
-import More from '../static/more.svg';
-
+import Logo from '../public/static/logo.svg';
+import Like from '../public/static/like.svg';
+import Plus from '../public/static/plus.svg';
+import Download from '../public/static/download.svg';
+import More from '../public/static/more.svg';
 import Header from '../components/header';
 import FullscreenImage from '../components/fullscreenImage';
 import Footer from '../components/footer';
 import User from '../components/user';
 import Button from '../components/button';
-
 import {
   GetRandomPhotoQuery,
   likePhotoMutation,
