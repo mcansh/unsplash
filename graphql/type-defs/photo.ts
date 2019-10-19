@@ -75,7 +75,6 @@ const PhotoTypeDefs = gql`
       orientation: String
     ): [Photo!]!
     getPhotoById(id: ID!, width: Int, height: Int): Photo!
-    isLogin: Boolean!
   }
 
   type Mutation {

@@ -14,9 +14,19 @@ class PhotoAPI extends RESTDataSource {
     return this.get('/photos/random', query);
   }
 
-  public getPhotoById(args: any) {
-    const query = getUrl(args);
-    return this.get(`/photos/${args.id}`, query);
+  public getPhotoById(photo: { id: string; width?: number; height?: number }) {
+    const query = getUrl(photo);
+    return this.get(`/photos/${photo.id}`, query);
+  }
+
+  public downloadPhoto(photo: { id: string }) {
+    return this.post(`/photos/${photo.id}/download`);
+  }
+
+  public likePhoto(photo: { id: string }) {
+    this.post(`/photos/${photo.id}/like`, undefined, {
+      headers: { Authorization: this.context.accessToken },
+    });
   }
 }
 
