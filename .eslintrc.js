@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['mcansh'],
+  extends: ['@mcansh/eslint-config/typescript'],
 };
