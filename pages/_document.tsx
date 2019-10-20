@@ -1,12 +1,19 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  Html,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 import { description } from '../package.json';
 import { twitter } from '../utils/helpers';
+import CSP from '~/components/csp';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
 
     const originalRenderPage = ctx.renderPage;
@@ -26,10 +33,8 @@ class MyDocument extends Document {
   }
 
   render() {
-    const { styleTags } = this.props;
-
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
           <meta
@@ -43,14 +48,14 @@ class MyDocument extends Document {
           <meta name="twitter:site" content={twitter} />
           <meta name="twitter:title" content="Unsplash Instant" />
           <meta name="twitter:description" content={description} />
-          {styleTags}
+          <CSP {...this.props} />
         </Head>
         <body>
           <Main />
-          <div id="portal" />
           <NextScript />
+          <div id="portal" />
         </body>
-      </html>
+      </Html>
     );
   }
 }
