@@ -1,4 +1,4 @@
-query RandomPhotoQuery {
+query RandomPhoto {
   randomPhoto(collections: 155105) {
     color
     likes

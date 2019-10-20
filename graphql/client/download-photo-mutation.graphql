@@ -1,4 +1,4 @@
-mutation downloadPhoto($id: ID!) {
+mutation DownloadPhoto($id: ID!) {
   downloadPhoto(id: $id) {
     url
   }

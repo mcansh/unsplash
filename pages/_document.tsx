@@ -13,7 +13,7 @@ import { twitter } from '../utils/helpers';
 import CSP from '~/components/csp';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  public static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
 
     const originalRenderPage = ctx.renderPage;
@@ -32,7 +32,7 @@ class MyDocument extends Document {
     };
   }
 
-  render() {
+  public render() {
     return (
       <Html lang="en">
         <Head>

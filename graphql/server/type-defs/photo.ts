@@ -5,6 +5,7 @@ const PhotoTypeDefs = gql`
     id: ID!
     created_at: String!
     updated_at: String!
+    promoted_at: String
     width: Int!
     height: Int!
     color: String!
@@ -62,6 +63,11 @@ const PhotoTypeDefs = gql`
     url: String!
   }
 
+  type LikePhotoResponse {
+    photo: Photo
+    user: User
+  }
+
   type Query {
     photos(count: Int, page: Int, orderBy: String, curated: Boolean): [Photo!]!
     randomPhoto(
@@ -78,7 +84,7 @@ const PhotoTypeDefs = gql`
   }
 
   type Mutation {
-    likePhoto(id: ID!): Photo!
+    likePhoto(id: ID!): LikePhotoResponse!
     downloadPhoto(id: ID!): PhotoDownload!
   }
 `;

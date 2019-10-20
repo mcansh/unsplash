@@ -6,7 +6,11 @@ class PhotoAPI extends RESTDataSource {
   public baseURL = 'https://api.unsplash.com';
 
   public willSendRequest(request: RequestOptions) {
-    request.headers.set('Authorization', `Client-ID ${process.env.KEY}`);
+    const token = this.context.req.headers.authorization;
+    request.headers.set(
+      'Authorization',
+      token || `Client-ID ${process.env.KEY}`
+    );
     request.headers.set('Accept-Version', 'v1');
   }
 
@@ -21,13 +25,11 @@ class PhotoAPI extends RESTDataSource {
   }
 
   public downloadPhoto(photo: { id: string }) {
-    return this.post(`/photos/${photo.id}/download`);
+    return this.get(`/photos/${photo.id}/download`);
   }
 
   public likePhoto(photo: { id: string }) {
-    this.post(`/photos/${photo.id}/like`, undefined, {
-      headers: { Authorization: this.context.accessToken },
-    });
+    return this.post(`/photos/${photo.id}/like`);
   }
 }
 
