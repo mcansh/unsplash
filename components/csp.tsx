@@ -10,17 +10,18 @@ const cspHashOf = (text: string) => {
 };
 
 const CSP = (props: DocumentProps) => {
+  const hash = cspHashOf(NextScript.getInlineScriptSource(props));
   const cspSettings = {
     'default-src': ["'self'"],
-    'script-src': ["'self'"],
+    'script-src': ["'self'", hash],
     'connect-src': ["'self'"],
-    'style-src': ["'self'"],
-    'img-src': ["'self'"],
+    'style-src': ["'unsafe-inline'"],
+    'img-src': ["'self'", 'images.unsplash.com'],
   };
 
   const csp = `${Object.entries(cspSettings)
     .map(([key, val]) => `${key} ${val.join(' ')}`)
-    .join(';')} ${cspHashOf(NextScript.getInlineScriptSource(props))}`;
+    .join(';')} ${hash}`;
 
   return <meta httpEquiv="Content-Security-Policy" content={csp} />;
 };

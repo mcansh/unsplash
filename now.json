@@ -1,5 +1,14 @@
 {
-  "name": "unsplash-new-tab",
-  "dotenv": ".env",
-  "alias": "unsplash.loganmcansh.com"
+  "name": "unsplash",
+  "alias": "unsplash.loganmcansh.com",
+  "routes": [
+    {
+      "src": "/sw.js",
+      "dest": "/_next/static/sw.js",
+      "headers": {
+        "Cache-Control": "max-age=0",
+        "Service-Worker-Allowed": "/"
+      }
+    }
+  ]
 }
