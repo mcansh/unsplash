@@ -3,12 +3,12 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 
 import withUrqlClient from '~/lib/with-urql-client';
-import { useRandomPhotoQueryQuery } from '~/generated/graphql';
+import { useRandomPhotoQuery } from '~/generated/graphql';
 import { FullscreenImage } from '~/components/fullscreen-image';
 import { Header } from '~/components/header';
 
 const Index: NextPage = () => {
-  const [{ data, error, fetching }, executeQuery] = useRandomPhotoQueryQuery();
+  const [{ data, error, fetching }, executeQuery] = useRandomPhotoQuery();
 
   if (fetching) {
     return <h1>Fetching photo...</h1>;
