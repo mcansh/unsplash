@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 interface Props {
+  backgroundHoverColor?: string;
   backgroundColor?: string;
   textColor?: string;
 }
@@ -12,15 +13,21 @@ const Button = styled.button<Props>`
   align-items: center;
   cursor: pointer;
   background: ${props => props.backgroundColor || 'rgba(255,255,255,0.8)'};
-  color: #777;
-  border-radius: 0.6rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  padding: 0.85rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 0 1.1rem;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  height: 3.2rem;
+  line-height: 1.2;
+  transition: all 0.2s ease-in-out;
 
-  &:not(:last-of-type) {
-    margin-right: 1rem;
+  :hover {
+    background: ${props => props.backgroundHoverColor || '#fff'};
+  }
+
+  :not(:last-of-type) {
+    margin-right: 0.9rem;
   }
 
   svg {
