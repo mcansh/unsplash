@@ -16,7 +16,8 @@
     "lint:css": "stylelint './**/*.js' './**/*.jsx' './**/*.tsx' './**/*.ts'",
     "test": "jest",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
-    "validate": "npm-run-all --parallel lint lint:css format type-check test"
+    "validate": "npm-run-all --parallel lint lint:css format type-check test",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "husky": {
     "hooks": {
@@ -58,6 +59,7 @@
     "urql": "1.6.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.8.1",
     "@mcansh/eslint-config": "2.2.4",
     "@testing-library/jest-dom": "4.1.2",
     "@testing-library/react": "9.3.0",
@@ -93,6 +95,9 @@
     "stylelint-config-styled-components": "0.1.1",
     "stylelint-prettier": "1.1.1",
     "stylelint-processor-styled-components": "1.8.0",
-    "typescript": "3.7.0-beta"
+    "typescript": "3.7.0-beta",
+    "@graphql-codegen/typescript": "1.8.1",
+    "@graphql-codegen/typescript-operations": "1.8.1",
+    "@graphql-codegen/typescript-urql": "1.8.1"
   }
 }

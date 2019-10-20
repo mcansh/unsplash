@@ -1,16 +1,12 @@
 import React from 'react';
 import { NextPage } from 'next';
-import { useQuery } from 'urql';
 import Head from 'next/head';
 
 import withUrqlClient from '~/lib/with-urql-client';
-import { GetRandomPhotoQuery } from '~/utils/graphql';
+import { useRandomPhotoQueryQuery } from '~/generated/graphql';
 
 const Index: NextPage = () => {
-  const [{ data, error, fetching }] = useQuery({
-    query: GetRandomPhotoQuery,
-    requestPolicy: 'cache-first',
-  });
+  const [{ data, error, fetching }] = useRandomPhotoQueryQuery();
 
   if (fetching) {
     return <h1>Fetching photo...</h1>;
@@ -20,9 +16,11 @@ const Index: NextPage = () => {
     return <pre>{JSON.stringify(error, null, 2)}</pre>;
   }
 
-  const [randomPhoto] = data.randomPhoto;
+  if (!data || !data.randomPhoto) {
+    return <h1>No Photos pls</h1>;
+  }
 
-  console.log(randomPhoto);
+  const [randomPhoto] = data.randomPhoto;
 
   return (
     <>
@@ -36,6 +34,7 @@ const Index: NextPage = () => {
         data-unsplash-url={randomPhoto.links.html}
         css={{
           height: '100vh',
+          width: '100vw',
           backgroundColor: randomPhoto.color,
           objectFit: 'cover',
         }}
