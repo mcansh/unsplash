@@ -19,7 +19,10 @@ const apolloServer = new ApolloServer({
   resolvers: [UserResolvers, PhotoResolvers],
   dataSources: () => ({ photo: new PhotoAPI(), user: new UserAPI() }),
   context: ({ req, res }: Context) => ({ req, res }),
-  cache: new RedisCache(process.env.REDIS),
+  cache:
+    process.env.NODE_ENV === 'production'
+      ? new RedisCache(process.env.REDIS)
+      : undefined,
 });
 
 export const config = {

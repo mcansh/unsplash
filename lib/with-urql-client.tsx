@@ -1,16 +1,22 @@
 import React from 'react';
-import { Provider } from 'urql';
+import { Provider, Client } from 'urql';
 import ssrPrepass from 'react-ssr-prepass';
 import { NextPageContext } from 'next';
 
 import { initUrqlClient } from './init-urql-client';
 
+interface Props {
+  urqlClient: Client;
+  urqlState: any;
+}
+
 const withUrqlClient = (App: any) => {
-  const withUrql = (props: any) => {
-    const urqlClient = React.useMemo(
+  const WithUrql = (props: Props) => {
+    const urqlClient: Client = React.useMemo(
       () => props.urqlClient || initUrqlClient(props.urqlState)[0],
       [props.urqlClient, props.urqlState]
     );
+
     return (
       <Provider value={urqlClient}>
         <App {...props} urqlClient={urqlClient} />
@@ -18,7 +24,7 @@ const withUrqlClient = (App: any) => {
     );
   };
 
-  withUrql.getInitialProps = async (ctx: NextPageContext) => {
+  WithUrql.getInitialProps = async (ctx: NextPageContext) => {
     const { AppTree } = ctx;
     // Run the wrapped component's getInitialProps function
     let appProps = {};
@@ -51,7 +57,7 @@ const withUrqlClient = (App: any) => {
     };
   };
 
-  return withUrql;
+  return WithUrql;
 };
 
 export default withUrqlClient;

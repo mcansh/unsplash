@@ -1,5 +1,4 @@
 import React from 'react';
-import { string, shape } from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -56,24 +55,5 @@ const User = ({ user, photoLocation }) => (
     </div>
   </Wrap>
 );
-
-User.propTypes = {
-  user: shape({
-    name: string.isRequired,
-    username: string.isRequired,
-    profile_image: shape({
-      small: string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  photoLocation: shape({
-    name: string,
-  }),
-};
-
-User.defaultProps = {
-  photoLocation: {
-    name: null,
-  },
-};
 
 export default User;
