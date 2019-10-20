@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GlobalStyle from '~/components/styles/global-style';
+import { GlobalStyle } from '~/components/style/global-style';
 import { useServiceWorker } from '~/hooks/use-service-worker';
 
 interface LayoutProps {

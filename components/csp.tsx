@@ -13,7 +13,7 @@ const CSP = (props: DocumentProps) => {
   const hash = cspHashOf(NextScript.getInlineScriptSource(props));
   const cspSettings = {
     'default-src': ["'self'"],
-    'script-src': ["'self'", hash],
+    'script-src': ["'self'", "'unsafe-inline'"],
     'connect-src': ["'self'"],
     'style-src': ["'unsafe-inline'"],
     'img-src': ["'self'", 'images.unsplash.com'],

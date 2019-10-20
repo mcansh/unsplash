@@ -4,9 +4,11 @@ import Head from 'next/head';
 
 import withUrqlClient from '~/lib/with-urql-client';
 import { useRandomPhotoQueryQuery } from '~/generated/graphql';
+import { FullscreenImage } from '~/components/fullscreen-image';
+import { Header } from '~/components/header';
 
 const Index: NextPage = () => {
-  const [{ data, error, fetching }] = useRandomPhotoQueryQuery();
+  const [{ data, error, fetching }, executeQuery] = useRandomPhotoQueryQuery();
 
   if (fetching) {
     return <h1>Fetching photo...</h1>;
@@ -29,19 +31,21 @@ const Index: NextPage = () => {
         <meta name="twitter:image" content={randomPhoto.urls.small} />
       </Head>
 
-      <img
+      <Header
+        id={randomPhoto.id}
+        url={randomPhoto.urls.raw}
+        likedByUser={randomPhoto.liked_by_user || false}
+        likes={randomPhoto.likes}
+        refetch={() => executeQuery({ requestPolicy: 'network-only' })}
+      />
+      <FullscreenImage
         src={randomPhoto.urls.full}
-        data-unsplash-url={randomPhoto.links.html}
-        css={{
-          height: '100vh',
-          width: '100vw',
-          backgroundColor: randomPhoto.color,
-          objectFit: 'cover',
-        }}
+        unsplashUrl={randomPhoto.links.html}
         alt={
           randomPhoto.description ||
           `A wonderful photo by ${randomPhoto.user.name}`
         }
+        backgroundColor={randomPhoto.color}
       />
     </>
   );

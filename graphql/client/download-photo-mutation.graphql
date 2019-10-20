@@ -1,0 +1,5 @@
+mutation downloadPhoto($id: ID!) {
+  downloadPhoto(id: $id) {
+    url
+  }
+}
