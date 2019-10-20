@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { NextApiRequest, NextApiResponse } from 'next';
-// import { RedisCache } from 'apollo-server-cache-redis';
+import { RedisCache } from 'apollo-server-cache-redis';
 
 import { PhotoAPI } from '~/graphql/data-sources/photo';
 import { PhotoResolvers } from '~/graphql/resolvers/photo';
@@ -19,7 +19,7 @@ const apolloServer = new ApolloServer({
   resolvers: [UserResolvers, PhotoResolvers],
   dataSources: () => ({ photo: new PhotoAPI(), user: new UserAPI() }),
   context: ({ req, res }: Context) => ({ req, res }),
-  // cache: new RedisCache(process.env.REDIS),
+  cache: new RedisCache(process.env.REDIS),
 });
 
 export const config = {

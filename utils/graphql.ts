@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 
 export const testQuery = gql`
   query isLogin {
@@ -16,6 +16,9 @@ export const GetRandomPhotoQuery = gql`
       liked_by_user
       location {
         name
+      }
+      links {
+        html
       }
       urls {
         full
