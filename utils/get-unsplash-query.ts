@@ -1,7 +1,7 @@
 import { format } from 'url';
 
 export const headers = {
-  Authorization: `Client-ID ${process.env.KEY}`,
+  Authorization: `Client-ID ${process.env.UNSPLASH_KEY}`,
 };
 
 export interface UrlOptions {

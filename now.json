@@ -1,6 +1,10 @@
 {
   "name": "unsplash",
-  "alias": "unsplash.loganmcansh.com",
+  "env": {
+    "UNSPLASH_KEY": "@unsplash_key",
+    "UNSPLASH_SECRET": "@unsplash_secret",
+    "UNSPLASH_REDIS": "@unsplash_redis"
+  },
   "routes": [
     {
       "src": "/sw.js",

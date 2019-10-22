@@ -9,7 +9,7 @@ class PhotoAPI extends RESTDataSource {
     const token = this.context.req.headers.authorization;
     request.headers.set(
       'Authorization',
-      token || `Client-ID ${process.env.KEY}`
+      token || `Client-ID ${process.env.UNSPLASH_KEY}`
     );
     request.headers.set('Accept-Version', 'v1');
   }

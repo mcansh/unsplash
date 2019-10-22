@@ -17,7 +17,7 @@ const apolloServer = new ApolloServer({
   context: ({ req, res }: Context) => ({ req, res }),
   cache:
     process.env.NODE_ENV === 'production'
-      ? new RedisCache(process.env.REDIS)
+      ? new RedisCache(process.env.UNSPLASH_REDIS)
       : undefined,
 });
 

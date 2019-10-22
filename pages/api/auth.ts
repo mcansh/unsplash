@@ -30,8 +30,8 @@ const auth = async (req: NextApiRequest, res: NextApiResponseWithCookie) => {
     hostname: 'unsplash.com',
     pathname: '/oauth/token',
     query: {
-      client_id: process.env.KEY,
-      client_secret: process.env.SECRET,
+      client_id: process.env.UNSPLASH_KEY,
+      client_secret: process.env.UNSPLASH_SECRET,
       redirect_uri: `${base}${req.url}`,
       grant_type: 'authorization_code',
       code,
