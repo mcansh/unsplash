@@ -31,6 +31,9 @@ function initUrqlClient(initialState?: any) {
         ssrCache,
         fetchExchange,
       ],
+      fetchOptions: {
+        credentials: 'include',
+      },
     });
   }
 

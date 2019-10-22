@@ -4,6 +4,7 @@ interface Props {
   backgroundHoverColor?: string;
   backgroundColor?: string;
   textColor?: string;
+  textHoverColor?: string;
 }
 
 const Button = styled.button<Props>`
@@ -25,6 +26,10 @@ const Button = styled.button<Props>`
 
   :hover {
     background: ${props => props.backgroundHoverColor || '#fff'};
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    span {
+      color: ${props => props.textHoverColor};
+    }
   }
 
   :not(:last-child) {
@@ -37,7 +42,7 @@ const Button = styled.button<Props>`
   }
 
   span {
-    color: #777;
+    color: ${props => props.textColor || '#777'};
   }
 
   svg + span {

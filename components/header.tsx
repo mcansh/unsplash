@@ -59,16 +59,22 @@ const Header: React.FC<Props> = ({ id, url, refetch, likedByUser, likes }) => {
       {meData && meData.me.id ? (
         <>
           <Button
+            backgroundHoverColor="#e04c4c"
+            textHoverColor="white"
+            backgroundColor={likedByUser ? '#f15151' : undefined}
+            textColor={likedByUser ? 'white' : undefined}
             type="button"
             disabled={likeRes.fetching}
             css={{
-              background: likedByUser ? '#f1f1f1' : undefined,
               display: 'flex',
+              ':hover svg': {
+                fill: 'white',
+              },
             }}
             onClick={() => likePhoto({ id })}
           >
             <VisuallyHidden>Like Photo</VisuallyHidden>
-            <Like css={{ fill: likedByUser ? 'white' : '#777' }} />
+            <Like css={{ fill: likedByUser ? 'white' : '#f15151' }} />
             <span>{likes}</span>
           </Button>
           <Button type="button">
