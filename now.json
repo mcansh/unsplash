@@ -3,7 +3,8 @@
   "env": {
     "UNSPLASH_KEY": "@unsplash_key",
     "UNSPLASH_SECRET": "@unsplash_secret",
-    "UNSPLASH_REDIS": "@unsplash_redis"
+    "UNSPLASH_REDIS": "@unsplash_redis",
+    "HOST": "https://unsplash.mcan.sh"
   },
   "routes": [
     {

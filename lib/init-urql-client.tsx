@@ -1,11 +1,6 @@
-import {
-  createClient,
-  dedupExchange,
-  cacheExchange,
-  fetchExchange,
-  ssrExchange,
-} from 'urql';
+import { createClient, dedupExchange, fetchExchange, ssrExchange } from 'urql';
 import { devtoolsExchange } from '@urql/devtools';
+import { cacheExchange } from '@urql/exchange-graphcache';
 
 import 'isomorphic-unfetch';
 
@@ -21,7 +16,7 @@ function initUrqlClient(initialState?: any) {
     ssrCache = ssrExchange({ initialState });
 
     urqlClient = createClient({
-      url: 'http://localhost:3000/api/graphql',
+      url: `${process.env.HOST}/api/graphql`,
       // Active suspense mode on the server-side
       suspense: isServer,
       exchanges: [
