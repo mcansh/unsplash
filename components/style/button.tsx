@@ -21,12 +21,13 @@ const Button = styled.button<Props>`
   height: 3.2rem;
   line-height: 1.2;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
 
   :hover {
     background: ${props => props.backgroundHoverColor || '#fff'};
   }
 
-  :not(:last-of-type) {
+  :not(:last-child) {
     margin-right: 0.9rem;
   }
 
@@ -35,9 +36,12 @@ const Button = styled.button<Props>`
     width: 1.5rem;
   }
 
+  span {
+    color: #777;
+  }
+
   svg + span {
     margin-left: 0.5rem;
-    color: ${props => props.textColor};
   }
 `;
 

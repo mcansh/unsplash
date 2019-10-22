@@ -1,5 +1,6 @@
 import React from 'react';
 import App from 'next/app';
+import { LinkProvider } from '@mcansh/custom-next-link';
 
 import Layout from '~/components/layout';
 
@@ -9,7 +10,9 @@ class MyApp extends App {
 
     return (
       <Layout>
-        <Component {...pageProps} />
+        <LinkProvider value="unsplash.mcan.sh">
+          <Component {...pageProps} />
+        </LinkProvider>
       </Layout>
     );
   }
