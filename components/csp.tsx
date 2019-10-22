@@ -16,7 +16,7 @@ const CSP = (props: DocumentProps) => {
     'script-src': ["'self'", "'unsafe-inline'"],
     'connect-src': ["'self'"],
     'style-src': ["'unsafe-inline'"],
-    'img-src': ["'self'", 'images.unsplash.com'],
+    'img-src': ["'self'", 'images.unsplash.com', 'data:'],
   };
 
   const csp = `${Object.entries(cspSettings)
