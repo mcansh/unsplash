@@ -82,7 +82,9 @@ const Header: React.FC<Props> = ({ id, url, refetch, likedByUser, likes }) => {
           </Button>
         </>
       ) : (
-        <Link href="https://unsplash.com/oauth/authorize?client_id=273ba9aad94fd8730eabbb73596b772c729894c12e0a3c048070a0606cb99d14&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth&response_type=code&scope=public+read_user+write_likes">
+        <Link
+          href={`https://unsplash.com/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth&response_type=code&scope=public+read_user+write_likes`}
+        >
           <ButtonLink>
             <span>Login</span>
           </ButtonLink>
