@@ -40,7 +40,6 @@
     "@sentry/browser": "5.7.1",
     "@sentry/node": "5.7.1",
     "@urql/devtools": "0.1.0",
-    "@urql/exchange-graphcache": "1.1.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "apollo-datasource-rest": "0.6.6",
     "apollo-server-cache-redis": "1.1.4",

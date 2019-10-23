@@ -1,6 +1,11 @@
-import { createClient, dedupExchange, fetchExchange, ssrExchange } from 'urql';
+import {
+  createClient,
+  dedupExchange,
+  fetchExchange,
+  cacheExchange,
+  ssrExchange,
+} from 'urql';
 import { devtoolsExchange } from '@urql/devtools';
-import { cacheExchange } from '@urql/exchange-graphcache';
 
 import 'isomorphic-unfetch';
 
