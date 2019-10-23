@@ -1,0 +1,27 @@
+query RandomPhoto {
+  randomPhoto(collections: 155105) {
+    color
+    likes
+    description
+    id
+    liked_by_user
+    location {
+      name
+    }
+    links {
+      html
+    }
+    urls {
+      full
+      small
+      raw
+    }
+    user {
+      name
+      username
+      profile_image {
+        small
+      }
+    }
+  }
+}

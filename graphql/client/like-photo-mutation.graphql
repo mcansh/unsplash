@@ -1,0 +1,8 @@
+mutation LikePhoto($id: ID!) {
+  likePhoto(id: $id) {
+    photo {
+      likes
+      liked_by_user
+    }
+  }
+}

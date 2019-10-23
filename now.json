@@ -1,5 +1,19 @@
 {
-  "name": "unsplash-new-tab",
-  "dotenv": ".env",
-  "alias": "unsplash.loganmcansh.com"
+  "name": "unsplash",
+  "env": {
+    "UNSPLASH_KEY": "@unsplash_key",
+    "UNSPLASH_SECRET": "@unsplash_secret",
+    "UNSPLASH_REDIS": "@unsplash_redis",
+    "HOST": "https://unsplash.mcan.sh"
+  },
+  "routes": [
+    {
+      "src": "/sw.js",
+      "dest": "/_next/static/sw.js",
+      "headers": {
+        "Cache-Control": "max-age=0",
+        "Service-Worker-Allowed": "/"
+      }
+    }
+  ]
 }

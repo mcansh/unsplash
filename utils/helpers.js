@@ -1,4 +1,5 @@
 import { parse } from 'somebody';
+
 import { author } from '../package.json';
 
 const { name, email, url } = parse(author);

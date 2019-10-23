@@ -1,7 +1,7 @@
 import React from 'react';
-import { string, shape } from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
+
 import { rel } from '../utils/helpers';
 
 const Wrap = styled.div`
@@ -16,11 +16,11 @@ const CustomLink = styled.a`
   color: white;
 `;
 
-const Name = CustomLink.extend`
+const Name = styled(CustomLink)`
   font-size: 1.6rem;
 `;
 
-const Location = CustomLink.extend`
+const Location = styled(CustomLink)`
   margin-top: 0.5rem;
   font-size: 1.1rem;
 `;
@@ -55,24 +55,5 @@ const User = ({ user, photoLocation }) => (
     </div>
   </Wrap>
 );
-
-User.propTypes = {
-  user: shape({
-    name: string.isRequired,
-    username: string.isRequired,
-    profile_image: shape({
-      small: string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  photoLocation: shape({
-    name: string,
-  }),
-};
-
-User.defaultProps = {
-  photoLocation: {
-    name: null,
-  },
-};
 
 export default User;

@@ -1,28 +1,40 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  Html,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+
 import { description } from '../package.json';
 import { twitter } from '../utils/helpers';
+import CSP from '~/components/csp';
 
 class MyDocument extends Document {
-  static async getInitialProps({ renderPage }) {
+  public static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
-    const page = renderPage(App => props =>
-      sheet.collectStyles(<App {...props} />)
-    );
-    const styleTags = sheet.getStyleElement();
 
+    const originalRenderPage = ctx.renderPage;
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+      });
+
+    const initialProps = await Document.getInitialProps(ctx);
     return {
-      ...page,
-      styleTags,
+      ...initialProps,
+      styles: [
+        ...(Array.isArray(initialProps.styles) ? initialProps.styles : []),
+        ...sheet.getStyleElement(),
+      ],
     };
   }
 
-  render() {
-    const { styleTags } = this.props;
-
+  public render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
           <meta
@@ -36,14 +48,14 @@ class MyDocument extends Document {
           <meta name="twitter:site" content={twitter} />
           <meta name="twitter:title" content="Unsplash Instant" />
           <meta name="twitter:description" content={description} />
-          {styleTags}
+          <CSP {...this.props} />
         </Head>
         <body>
           <Main />
-          <div id="portal" />
           <NextScript />
+          <div id="portal" />
         </body>
-      </html>
+      </Html>
     );
   }
 }
