@@ -1,5 +1,5 @@
-import { PhotoResolvers } from '~/graphql/server/resolvers/photo';
-import { UserResolvers } from '~/graphql/server/resolvers/user';
+import { PhotoResolvers } from './photo';
+import { UserResolvers } from './user';
 
 const resolvers = [PhotoResolvers, UserResolvers];
 

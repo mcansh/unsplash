@@ -13,7 +13,6 @@ import More from '~/public/static/more.svg';
 import {
   useDownloadPhotoMutation,
   useLikePhotoMutation,
-  useMeQuery,
 } from '~/generated/graphql';
 
 const ButtonLink = Button.withComponent('a');
@@ -49,7 +48,8 @@ interface Props {
 const Header: React.FC<Props> = ({ id, url, refetch, likedByUser, likes }) => {
   const [downloadRes, downloadPhoto] = useDownloadPhotoMutation();
   const [likeRes, likePhoto] = useLikePhotoMutation();
-  const [{ data: meData }] = useMeQuery();
+
+  const meData = { me: { id: null } };
 
   return (
     <HeaderStyles>

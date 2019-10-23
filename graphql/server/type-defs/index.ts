@@ -1,5 +1,5 @@
-import { PhotoTypeDefs } from '~/graphql/server/type-defs/photo';
-import { UserTypeDefs } from '~/graphql/server/type-defs/user';
+import { PhotoTypeDefs } from './photo';
+import { UserTypeDefs } from './user';
 
 const typeDefs = [PhotoTypeDefs, UserTypeDefs];
 
